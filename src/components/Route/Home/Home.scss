@@ -1,0 +1,58 @@
+div.page-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    min-height: calc(100vh - 230px);
+    margin: auto;
+    padding: 15px;
+}
+
+div.faucet {
+    width: 100%;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 300;
+        margin: 0 0 15px 0;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    div.inline-input {
+        display: flex;
+        align-items: center;
+    }
+
+    input {
+        width: 100%;
+        max-width: 640px;
+        height: 50px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        background: darken(white, 5%);
+        padding: 0 15px;
+        margin: 0 0 15px 0;
+    }
+
+    a.button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 15px 15px;
+        width: 180px;
+        height: 50px;
+        border-radius: 5px;
+        background: linear-gradient(107deg, rgba(77,118,255,1) 0%, rgba(15,63,140,1) 100%);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
