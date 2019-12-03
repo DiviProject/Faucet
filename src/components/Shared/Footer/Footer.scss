@@ -13,10 +13,17 @@ footer {
     div.fhead {
         display: flex;
         align-items: center;
+        padding: 15px 0;
 
         img {
             height: 24px;
             margin: 0 15px 0 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
         }
     }
 
@@ -29,6 +36,10 @@ footer {
             width: 50%;
             height: 40px;
             color: black;
+
+            @media (max-width: 640px) {
+                width: 100%;
+            }
         }
     }
 }
