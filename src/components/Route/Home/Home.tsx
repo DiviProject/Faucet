@@ -15,6 +15,7 @@ export type HomeProps = {
 * The key values of the state in the Home Componet
 */
 export type HomeState = {
+    pageError: boolean;
     printed: number;
     blocks: number;
     address: string;
@@ -32,6 +33,7 @@ export class Home extends Component<HomeProps, HomeState> {
     public constructor(props: any) {
         super(props);
         this.state = {
+            pageError: false,
             printed: 0,
             blocks: 0,
             address: '',
@@ -67,7 +69,12 @@ export class Home extends Component<HomeProps, HomeState> {
             const printed = await Supply();
             const blocks = await Blocks();
 
-            this.setState({ printed, blocks });
+            if (printed.errno) {
+                this.setState({ pageError: true });
+            } else {
+                this.setState({ pageError: false, printed, blocks });
+            }
+
         } catch (error) {
             this.setState({ error: true, message: error });
             setTimeout(() => {
@@ -116,23 +123,39 @@ export class Home extends Component<HomeProps, HomeState> {
     * Formats numeric values with commas.
     */
     public format(x: number): string {
-        var parts = x.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return parts.join(".");
+        if (!isNaN(x)) {
+            var parts = x.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return parts.join(".");
+        } else {
+            return "error";
+        }
     }
 
     public render() {
         return(
             <div className="page-wrap">
+                <div className="page-error">
+                    <h2>The Faucet is having issues connecting to the network</h2>
+                    <p>
+                        If it's still down after a few hours, please reach out to us on
+
+                        <a href="https://github.com/DiviProject/Faucet/issues">
+                            Github
+                        </a>
+
+                    </p>
+                </div>
+
                 <div className="faucet">
-                    <h2>Print Testnet Divi Coins</h2>
+                    <h2>Print Testnet DIVI Coins</h2>
                     <h3>
-                        The faucet has printed
+                        The faucet has
                         <div className="cd-printed">
                             <img src={logo} alt="logo" title="logo" />
                             {this.format(this.state.printed)}
                         </div>
-                        Divis in
+                        DIVIs in
                         <div className="cd-blocks">{this.format(this.state.blocks)}</div>
                         blocks
                     </h3>
